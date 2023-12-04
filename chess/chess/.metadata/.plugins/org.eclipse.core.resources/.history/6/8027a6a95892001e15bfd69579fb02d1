@@ -1,0 +1,17 @@
+package sample;
+
+import javafx.scene.layout.GridPane;
+
+public class Controller {
+
+    
+    GridPane chessBoard;
+
+    public void initialize(){
+
+        // Themes are Coral, Dusk, Wheat, Marine, Emerald, Sandcastle
+
+        Game game = new Game(chessBoard, "Coral");
+
+    }
+}
