@@ -13,7 +13,7 @@ public class Main extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
         primaryStage.setTitle("Chess");
         // Increase the width to accommodate the moves list next to the chessboard
-        primaryStage.setScene(new Scene(root, 1100  , 800)); // Adjust the width as needed
+        primaryStage.setScene(new Scene(root, 1120  , 800)); // Adjust the width as needed
         primaryStage.setResizable(false);
         primaryStage.show();
     }

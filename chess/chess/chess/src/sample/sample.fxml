@@ -1,12 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.layout.Pane?>
 
 <HBox xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller" spacing="10">
     <Pane fx:id="chessBoardContainer" HBox.hgrow="ALWAYS" />
-    <ScrollPane HBox.hgrow="NEVER">
-        <ListView fx:id="movesList" prefWidth="300.0" /> <!-- Set the preferred width -->
-    </ScrollPane>
+    <VBox HBox.hgrow="NEVER" spacing="5">
+        <Label text="Move History" style="-fx-font-size: 16px; -fx-font-weight: bold;" />
+        <ScrollPane fitToWidth="true">
+            <ListView fx:id="movesList" prefWidth="320.0" /> <!-- Set the preferred width -->
+        </ScrollPane>
+    </VBox>
 </HBox>
