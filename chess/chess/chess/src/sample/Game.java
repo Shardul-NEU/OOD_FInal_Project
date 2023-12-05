@@ -1,10 +1,17 @@
 package sample;
 
+import java.util.Stack;
+
 import javafx.event.EventHandler;
+import javafx.scene.Scene;
+import javafx.scene.control.ListView;
+import javafx.scene.layout.BorderPane;
+
 import javafx.event.EventTarget;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 
 public class Game {
@@ -13,13 +20,19 @@ public class Game {
     public static String currentPlayer;
     public static ChessBoard cb;
     private boolean game;
-
-    public Game(GridPane chessBoard, String theme){
-        cb = new ChessBoard(chessBoard, theme);
+    private Controller controller;
+    
+    public Game(String theme){
+        cb = new ChessBoard(theme);
         currentPiece = null;
         currentPlayer = "white";
         this.game = true;
-        addEventHandlers(cb.chessBoard);
+        addEventHandlers((GridPane)cb.getChessBoard());
+        
+       
+    }
+    public ChessBoard getChessBoard() {
+        return cb;
     }
 
     private void addEventHandlers(GridPane chessBoard){
@@ -124,7 +137,12 @@ public class Game {
         initialSquare.occupied = false;
         currentPiece.posX = square.x;
         currentPiece.posY = square.y;
+        if (currentPiece != null) {
+        	System.out.println("This is being called");
+        makeMove(initialSquare, square, currentPiece, null);
+        }
         deselectPiece(true);
+       
     }
 
     private void killPiece(Square square){
@@ -142,8 +160,23 @@ public class Game {
         initialSquare.occupied = false;
         currentPiece.posX = square.x;
         currentPiece.posY = square.y;
+        makeMove(initialSquare, square, currentPiece, killedPiece);
         deselectPiece(true);
+        System.out.println("piece killed in the method");
+        
     }
-
-
+    
+    public void setController(Controller controller) {
+        this.controller = controller;  // Setter for the controller
+    }
+    
+    public void makeMove(Square startSquare, Square endSquare, Piece movedPiece, Piece capturedPiece) {
+        // ... logic to make a move ...
+        cb.recordMove(startSquare, endSquare, movedPiece, capturedPiece); // assuming no piece is captured
+        if (controller != null) {
+            controller.updateMovesList(); // Update the moves list
+            System.out.println("updateMovesList called");
+        }
+    }
 }
+

@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.RowConstraints?>
 
-<GridPane fx:id="chessBoard" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
-  <columnConstraints>
-  </columnConstraints>
-  <rowConstraints>
-  </rowConstraints>
-</GridPane>
+<HBox xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller" spacing="10">
+    <Pane fx:id="chessBoardContainer" HBox.hgrow="ALWAYS" />
+    <ScrollPane HBox.hgrow="NEVER">
+        <ListView fx:id="movesList" prefWidth="300.0" /> <!-- Set the preferred width -->
+    </ScrollPane>
+</HBox>

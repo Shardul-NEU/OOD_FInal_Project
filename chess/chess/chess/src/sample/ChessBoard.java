@@ -1,26 +1,31 @@
 package sample;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 
 import java.util.ArrayList;
+import java.util.Stack;
 
+import javafx.scene.Node;
+import javafx.scene.control.ListView;
 public class ChessBoard {
 
-    GridPane chessBoard;
-    String theme;
+    private GridPane chessBoard = new GridPane();
+    private String theme;
     public ArrayList<Square> squares = new ArrayList<>();
+    private Stack<Move> moveHistory = new Stack<>();
 
-    public ChessBoard(GridPane chessBoard, String theme){
-        this.chessBoard = chessBoard;
+    public ChessBoard(String theme){
         this.theme = theme;
-
-        makeBoard(this.chessBoard, theme);
+        makeBoard(this.theme);  // Modified to not take GridPane as a parameter
     }
+    
+   
 
-
-    private void makeBoard(GridPane chessBoard, String theme){
+    private void makeBoard(String theme){
         for(int i=0; i<8; i++){
             for(int j=0; j<8; j++){
                 Square square = new Square(i,j);
@@ -36,6 +41,7 @@ public class ChessBoard {
         }
         addPieces();
     }
+    
 
     private void setTheme(Square square, String theme, int i, int j){
         Color color1 = Color.web("#ffffff00");
@@ -79,6 +85,26 @@ public class ChessBoard {
     private void addPiece(Square square, Piece piece){
         square.getChildren().add(piece);
         square.occupied = true;
+    }
+    
+    
+    public void recordMove(Square start, Square end, Piece pieceMoved, Piece pieceCaptured) {
+        Move move = new Move(start, end, pieceMoved, pieceCaptured);
+        moveHistory.push(move);
+        // After updating moveHistory, also update the ListView's items
+    }
+    
+  
+    public ObservableList<String> getMoves() {
+        ObservableList<String> movesList = FXCollections.observableArrayList();
+        for (Move move : moveHistory) {
+            movesList.add(move.toString());
+        }
+        return movesList;
+    }
+    
+    public Stack<Move> getMoveHistory() {
+        return moveHistory;
     }
 
     private void addPieces(){
@@ -144,6 +170,10 @@ public class ChessBoard {
         }
         return null;  // Return null if no piece is found on the square
     }
+	public Node getChessBoard() {
+		// TODO Auto-generated method stub
+		return chessBoard;
+	}
 
 
 }

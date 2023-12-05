@@ -11,7 +11,7 @@ import javafx.scene.paint.Color;
 import java.io.InputStream;
 import java.util.ArrayList;
 
-public class Piece extends ImageView {
+public abstract class Piece extends ImageView {
     String type;
     String color;
     int posX, posY;
@@ -22,6 +22,11 @@ public class Piece extends ImageView {
         this.posX = posX;
         this.posY = posY;
         addEventHandler();
+    }
+    public String getType() {
+    	System.out.println(type);
+        return type;
+        
     }
 
     public String getColor(){
@@ -52,7 +57,7 @@ public class Piece extends ImageView {
 
     }
 
-    public void getAllPossibleMoves() {}
+    public abstract void getAllPossibleMoves();
 
     public void showAllPossibleMoves(boolean val){
         if(val){
